@@ -1,0 +1,37 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Xingmengyuan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+<!-- 添加radio button 中的重复项  android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:drawablePadding="2dp"
+            android:textColor="@drawable/main_rbtext"-->
+    <style name="main_rb">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textColor">@drawable/main_rbtext</item>
+    </style>
+    <style name="TranslucentTheme" parent="Theme.AppCompat">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="statusBar" parent="Theme.AppCompat">
+    </style>
+
+
+</resources>
