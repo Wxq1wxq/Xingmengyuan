@@ -18,10 +18,10 @@ public class AssetsUtils {
     private  static Map<String,Bitmap> logoImgMap;
     private  static Map<String,Bitmap> contentLogoImageMap;
 public  static String getJsonFromAssets(Context context, String name)
-{
+{   //获取数据
     AssetManager am = context.getResources().getAssets();
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-    try {
+    try {//从文件中读取到内存
         InputStream inputStream = am.open(name);
         int count=0;
         byte[] buf=new byte[1024];
@@ -62,7 +62,6 @@ public  static void saveBitmapFromAssets(Context context, StarInfoBean starInfoB
         String contentName="xzcontentlogo/"+logoname+".png";
         Bitmap bitmap1=getBitmapFormAssets(context,contentName);
         contentLogoImageMap.put(logoname,bitmap1);
-
     }
 
 }
