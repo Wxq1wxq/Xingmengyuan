@@ -1,5 +1,9 @@
 package com.example.xingmengyuan.partenterfrag;
 
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.xingmengyuan.MainActivity;
 import com.example.xingmengyuan.R;
 import com.example.xingmengyuan.bean.StarInfoBean;
 import com.example.xingmengyuan.utils.AssetsUtils;
@@ -26,9 +31,9 @@ import java.util.Map;
 
 
 public class PartnerFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-    ImageView manIv,womanIv;
-    Spinner manSp,womanSp;
-    Button prizeBtn,analysisBtn;
+    ImageView manIv,womanIv;//男女配对分析星座图片
+    Spinner manSp,womanSp;//选择星座的下拉选项列表
+    Button prizeBtn,analysisBtn;//每日抽奖和配对分析button
     List<StarInfoBean.StarinfoDTO> starInfoList;
     List<String> nameList;
     Map<String, Bitmap> contentLogoImageMap;
@@ -39,11 +44,11 @@ public class PartnerFragment extends Fragment implements View.OnClickListener, A
         View view=inflater.inflate(R.layout.fragment_partner, container, false);
         initView(view);
         Bundle bundle = getArguments();
-        StarInfoBean starBean = (StarInfoBean)bundle.getSerializable("info");
+        StarInfoBean starBean = (StarInfoBean)bundle.getSerializable("info");//获取MainActivity传递过来的数据Bean
         starInfoList = starBean.getStarinfo();
 
         nameList=new ArrayList<>();
-        for(int i=0;i<starInfoList.size();i++){
+        for(int i=0;i<starInfoList.size();i++){//将starInfoList中存储的name存放到nameList中
             String name=starInfoList.get(i).getName();
             nameList.add(name);
         }
@@ -54,9 +59,11 @@ public class PartnerFragment extends Fragment implements View.OnClickListener, A
 
         String logoname = starInfoList.get(0).getLogoname();
        contentLogoImageMap = AssetsUtils.getContentLogoImageMap();
+       //刚进入界面男女都设置成白羊座图案
         Bitmap bitmap = contentLogoImageMap.get(logoname);
         manIv.setImageBitmap(bitmap);
         womanIv.setImageBitmap(bitmap);
+
         return view;
     }
 
@@ -79,6 +86,13 @@ public class PartnerFragment extends Fragment implements View.OnClickListener, A
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.partnerfrag_btn_prize:
+                AlertDialog.Builder dialog=new AlertDialog.Builder(getContext());
+                dialog.setTitle("榔头警告")
+                        .setMessage("还想白嫖？")
+                        .setCancelable(true)
+                        .setIcon(R.mipmap.ib_luck_focus)
+                        .create();
+                dialog.show();
 
                 break;
             case R.id.partnerfrag_btn_analysis:

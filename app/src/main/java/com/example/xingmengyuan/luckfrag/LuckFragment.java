@@ -1,5 +1,6 @@
 package com.example.xingmengyuan.luckfrag;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,60 +8,41 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 import com.example.xingmengyuan.R;
+import com.example.xingmengyuan.bean.StarInfoBean;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LuckFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class LuckFragment extends Fragment {
+import java.io.Serializable;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public LuckFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LuckFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LuckFragment newInstance(String param1, String param2) {
-        LuckFragment fragment = new LuckFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+public class LuckFragment extends Fragment  implements GridView.OnItemClickListener {
+GridView luckGv;
+    List<StarInfoBean.StarinfoDTO> mData;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_luck, container, false);
+
+        View view= inflater.inflate(R.layout.fragment_luck, container, false);
+        luckGv=view.findViewById(R.id.luckfrag_gv);
+//        Bundle bundle =new Bundle();//null
+        Bundle bundle=getArguments();//获取
+        StarInfoBean bean = (StarInfoBean) bundle.getSerializable("info");
+        mData = bean.getStarinfo();
+        LuckBaseAdapter adapter=new LuckBaseAdapter(getContext(),mData);
+        luckGv.setAdapter(adapter);
+        luckGv.setOnItemClickListener(this);
+        return view;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        StarInfoBean.StarinfoDTO starinfoDTO = mData.get(position);
+        String name=starinfoDTO.getName();
+        Intent intent=new Intent(getContext(),LuckAnalysisActivity.class);
+        intent.putExtra("name",name);
+        startActivity(intent);
     }
 }

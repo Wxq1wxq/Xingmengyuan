@@ -9,6 +9,10 @@
     <string name="partner">分别选您的星座和对方的星座，点击配对分析即可。</string>
     <string name="partner_btn_prize">每日抽奖</string>
     <string name="partner_gtn_analysis">开始配对分析</string>
+    <string name="app_about">关于应用</string>
+    <string name="app_features">功能介绍</string>
+    <string name="app_updateLog">更新日志</string>
+    <string name="app_reportError">反馈问题</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

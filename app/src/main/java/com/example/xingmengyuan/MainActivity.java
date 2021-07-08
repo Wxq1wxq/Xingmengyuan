@@ -49,10 +49,11 @@ private FragmentManager manger;
         addFragmentPage();
         mainRg.setOnCheckedChangeListener(this);
 
+
     }
 
     private StarInfoBean loadData() {
-        String json=AssetsUtils.getJsonFromAssets(this,"xzcontent/xzcontent.json");
+        String json=AssetsUtils.getJsonFromAssets(this,"xzcontent/xzcontent.json");//获取本地json数据为什么不需要子线程中进行，获取网络json数据则需要
         Gson gson=new Gson();
         StarInfoBean starInfoBean = gson.fromJson(json, StarInfoBean.class);
         AssetsUtils.saveBitmapFromAssets(this,starInfoBean);
