@@ -48,8 +48,6 @@ private FragmentManager manger;
         meFag.setArguments(bundle);
         addFragmentPage();
         mainRg.setOnCheckedChangeListener(this);
-
-
     }
 
     private StarInfoBean loadData() {
